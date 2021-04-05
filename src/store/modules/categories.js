@@ -1,7 +1,7 @@
 import { api } from '../../api';
+import { types } from '../types';
 
-const SET_CATEGORIES = 'setCategories';
-const SET_IS_LOADING = 'setIsLoading';
+const { SET_CATEGORIES, SET_IS_LOADING } = types;
 
 export const categories = {
   state: {

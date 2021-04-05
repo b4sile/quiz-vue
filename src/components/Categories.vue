@@ -1,20 +1,67 @@
 <template>
   <h1>Choose category</h1>
   <div v-if="isLoading">Loading...</div>
-  <div v-else>{{ categories }}</div>
+  <ul v-else>
+    <li
+      @click="setCurrentCategory({ id, name })"
+      :key="id"
+      v-for="{ id, name, total_num_of_questions } in categories"
+    >
+      <router-link to="options">
+        <h2>{{ name }}</h2>
+        <div class="count">All questions: {{ total_num_of_questions }}</div>
+      </router-link>
+    </li>
+  </ul>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { types } from '../store';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'Categories',
-  computed: mapState('categories', ['categories', 'isLoading']),
-  methods: mapActions('categories', ['fetchCategories']),
-  created() {
-    this.fetchCategories();
-  },
+  computed: { ...mapState('categories', ['categories', 'isLoading']) },
+  methods: { ...mapMutations('quiz', [types.SET_CURRENT_CATEGORY]) },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ul {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  li {
+    cursor: pointer;
+    border: 5px solid #7a9aa7;
+    background: #f8fdff;
+    border-radius: 10px;
+    margin: 5px;
+    flex: 1 0 250px;
+    min-height: 150px;
+    transition: background ease 0.3s;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &:hover {
+      background: #d1e7f0;
+    }
+
+    .count {
+      margin-bottom: 10px;
+    }
+  }
+}
+</style>

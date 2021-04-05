@@ -13,8 +13,8 @@ export const api = {
       axios.get('/api_category.php'),
       axios.get('/api_count_global.php'),
     ]),
-  getQuestions: (categoryId, amount, difficulty) =>
-    axios.get(
-      `/api.php?category=${categoryId}&amount=${amount}&difficulty=${difficulty}`
-    ),
+  getQuestions: ({ categoryId, amount, difficulty }) =>
+    axios.get(`/api.php`, {
+      params: { category: categoryId, amount, difficulty },
+    }),
 };
