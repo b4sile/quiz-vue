@@ -2,6 +2,11 @@
   <h1>Choose category</h1>
   <div v-if="isLoading">Loading...</div>
   <ul v-else>
+    <li @click="setCurrentCategory({ name: 'Any' })">
+      <router-link to="options">
+        <h2>Any</h2>
+      </router-link>
+    </li>
     <li
       @click="setCurrentCategory({ id, name })"
       :key="id"
@@ -34,7 +39,6 @@ ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 
   li {
     cursor: pointer;
@@ -42,7 +46,8 @@ ul {
     background: #f8fdff;
     border-radius: 10px;
     margin: 5px;
-    flex: 1 0 250px;
+    width: 23%;
+    min-width: 250px;
     min-height: 150px;
     transition: background ease 0.3s;
 

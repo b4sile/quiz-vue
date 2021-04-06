@@ -1,41 +1,50 @@
 <template>
   <div class="top">
-    <h1 v-if="currentCategory">Chosen category - {{ currentCategory.name }}</h1>
-    <button @click="$router.go(-1)">Back</button>
+    <h2 v-if="currentCategory">Category - {{ currentCategory.name }}</h2>
+    <Button @click="$router.go(-1)">Back</Button>
   </div>
   <form @submit.prevent="$router.push('/quiz')">
     <div>
-      Choose number of questions
-      <label v-for="value in allAmounts" :key="value">
-        {{ value }}
-        <input
-          name="amount"
-          type="radio"
-          @change="setAmount(value)"
+      <h2>
+        Choose number of questions:
+      </h2>
+      <div class="options">
+        <RadioButton
+          v-for="value in allAmounts"
+          :value="value"
+          :key="value"
           :checked="value === amount"
+          name="amount"
+          :onChange="setAmount"
         />
-      </label>
+      </div>
     </div>
     <div>
-      Choose difficulty
-      <label v-for="value in allDifficulties" :key="value">
-        {{ value }}
-        <input
-          name="difficulty"
-          type="radio"
-          @change="setDifficulty(value)"
+      <h2>
+        Choose difficulty:
+      </h2>
+      <div class="options">
+        <RadioButton
+          v-for="value in allDifficulties"
+          :value="value"
+          :key="value"
           :checked="value === difficulty || value === 'any'"
+          name="difficulty"
+          :onChange="setDifficulty"
         />
-      </label>
+      </div>
     </div>
-    <button type="submit">start</button>
+    <Button class="submit" type="submit">start</Button>
   </form>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { types } from '../store';
+import RadioButton from '../components/RadioButton.vue';
+import Button from '../components/Button.vue';
 
 export default {
+  components: { RadioButton, Button },
   name: 'Options',
   computed: {
     ...mapState('quiz', [
@@ -57,9 +66,20 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-button {
-  cursor: pointer;
-  padding: 10px 30px;
-  text-transform: uppercase;
+.submit {
+  margin-top: 10px;
+  padding: 20px 60px;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 400px) {
+  .options {
+    justify-content: space-around;
+  }
+  .submit {
+    width: 100%;
+  }
 }
 </style>

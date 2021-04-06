@@ -6,4 +6,5 @@ export const types = {
   SET_DIFFICULTY: 'setDifficulty',
   SET_AMOUNT: 'setAmount',
   SET_QUESTION_INDEX: 'setQuestionIndex',
+  SET_CURRENT_ANSWER: 'setCurrentAnswer',
 };

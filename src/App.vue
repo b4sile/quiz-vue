@@ -4,6 +4,7 @@
 
 <script>
 import 'normalize.css';
+import './assets/css/main.css';
 import { mapActions } from 'vuex';
 
 export default {
@@ -20,6 +21,7 @@ export default {
   width: 1150px;
   margin: 0 auto;
   min-width: 320px;
+  height: 100%;
 }
 
 @media screen and (max-width: 1200px) {
