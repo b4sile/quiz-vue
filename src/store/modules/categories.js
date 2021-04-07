@@ -20,6 +20,9 @@ export const categories = {
     async fetchCategories({ commit }) {
       commit(SET_IS_LOADING, true);
       try {
+        if (!localStorage.getItem('token')) {
+          api.getToken();
+        }
         const [
           {
             data: { trivia_categories },

@@ -10,6 +10,7 @@ const {
   SET_AMOUNT,
   SET_QUESTION_INDEX,
   SET_CURRENT_ANSWER,
+  CLEAR_QUIZ_STATE,
 } = types;
 
 const allDifficulties = ['any', 'easy', 'medium', 'hard'];
@@ -31,10 +32,30 @@ export const quiz = {
     currentQuestion: (state) => {
       return state.questions[state.currentQuestionIndex];
     },
+    getResults: (state) => {
+      const correctAnswers = state.questions.reduce(
+        (acc, { correct_answer }, ind) =>
+          htmlEncode(correct_answer) === state.answers[ind] ? ++acc : acc,
+        0
+      );
+      const totalAnswers = state.questions.length;
+      return {
+        correctAnswers,
+        totalAnswers,
+        percentCorrectAnswers: ((correctAnswers / totalAnswers) * 100).toFixed(
+          1
+        ),
+      };
+    },
   },
   mutations: {
     [SET_CURRENT_CATEGORY](state, payload) {
       state.currentCategory = payload;
+    },
+    [CLEAR_QUIZ_STATE](state) {
+      state.currentQuestionIndex = 0;
+      state.questions = [];
+      state.answers = [];
     },
     [SET_QUESTION_INDEX](state, payload) {
       state.currentQuestionIndex = payload;

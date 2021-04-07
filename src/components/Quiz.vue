@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div>
       <div v-if="isLoading">Loading...</div>
-      <div v-else>
+      <div class="questions" v-else>
         <h2>{{ currentQuestion.question }}</h2>
         <div>
           <RadioButton
@@ -29,6 +29,11 @@
           @click="setQuestionIndex(currentQuestionIndex + 1)"
           >next</Button
         >
+      </div>
+      <div class="finish">
+        <router-link to="/result">
+          <Button class="btn">finish</Button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -67,6 +72,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.questions {
+  min-height: 500px;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -87,6 +95,10 @@ export default {
   margin-top: 15px;
   justify-content: space-between;
 }
+.finish {
+  margin-top: 15px;
+  text-align: left;
+}
 @media screen and (max-width: 800px) {
   .wrapper {
     width: 100%;
@@ -95,6 +107,11 @@ export default {
 @media screen and (max-width: 450px) {
   .btn {
     padding: 20px 60px;
+  }
+  .finish {
+    .btn {
+      width: 100%;
+    }
   }
 }
 </style>

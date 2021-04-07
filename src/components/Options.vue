@@ -56,7 +56,14 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations('quiz', [types.SET_DIFFICULTY, types.SET_AMOUNT]),
+    ...mapMutations('quiz', [
+      types.SET_DIFFICULTY,
+      types.SET_AMOUNT,
+      types.CLEAR_QUIZ_STATE,
+    ]),
+  },
+  created() {
+    this.clearQuizState();
   },
 };
 </script>

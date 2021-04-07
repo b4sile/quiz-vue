@@ -1,10 +1,11 @@
 import _axios from 'axios';
+import { getToken, setToken } from '../utils';
 
 const url = 'https://opentdb.com';
 
 const axios = _axios.create({
   baseURL: url,
-  params: { token: localStorage.getItem('token') },
+  params: { token: getToken('token') },
 });
 
 export const api = {
@@ -15,6 +16,18 @@ export const api = {
     ]),
   getQuestions: ({ categoryId, amount, difficulty }) =>
     axios.get(`/api.php`, {
-      params: { category: categoryId, amount, difficulty },
+      params: {
+        category: categoryId,
+        amount,
+        difficulty,
+        token: getToken('token'),
+      },
     }),
+  getToken: () =>
+    axios
+      .get('/api_token.php?command=request')
+      .then(({ data: { token } }) =>
+        setToken('token', token, 1000 * 60 * 60 * 6)
+      )
+      .catch((err) => console.log(err)),
 };

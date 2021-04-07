@@ -69,4 +69,10 @@ ul {
     }
   }
 }
+@media screen and (max-width: 614px) {
+  ul li {
+    width: 100%;
+    min-width: none;
+  }
+}
 </style>

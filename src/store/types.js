@@ -7,4 +7,5 @@ export const types = {
   SET_AMOUNT: 'setAmount',
   SET_QUESTION_INDEX: 'setQuestionIndex',
   SET_CURRENT_ANSWER: 'setCurrentAnswer',
+  CLEAR_QUIZ_STATE: 'clearQuizState',
 };
