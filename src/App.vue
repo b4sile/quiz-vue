@@ -29,4 +29,10 @@ export default {
     width: 90%;
   }
 }
+@media screen and (max-width: 400px) {
+  #app {
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+}
 </style>

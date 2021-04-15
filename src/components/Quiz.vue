@@ -105,6 +105,12 @@ export default {
   }
 }
 @media screen and (max-width: 450px) {
+  .btns {
+    .btn:first-child {
+      margin-bottom: 15px;
+    }
+    flex-direction: column;
+  }
   .btn {
     padding: 20px 60px;
   }

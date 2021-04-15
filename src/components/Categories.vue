@@ -35,18 +35,19 @@ export default {
 ul {
   text-align: center;
   padding: 0;
-  margin: 0;
+  margin: 0 -5px;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
 
   li {
+    box-sizing: border-box;
+    flex: 0 1 calc(25% - 10px);
     cursor: pointer;
     border: 5px solid #7a9aa7;
     background: #f8fdff;
     border-radius: 10px;
     margin: 5px;
-    width: 23%;
     min-width: 250px;
     min-height: 150px;
     transition: background ease 0.3s;
@@ -69,10 +70,19 @@ ul {
     }
   }
 }
-@media screen and (max-width: 614px) {
+@media screen and (max-width: 1160px) {
   ul li {
-    width: 100%;
-    min-width: none;
+    flex-basis: calc(33.333% - 10px);
+  }
+}
+@media screen and (max-width: 871px) {
+  ul li {
+    flex-basis: calc(50% - 10px);
+  }
+}
+@media screen and (max-width: 581px) {
+  ul li {
+    flex-basis: 100%;
   }
 }
 </style>
